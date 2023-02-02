@@ -1,0 +1,357 @@
+* {
+    padding: 0 px;
+    margin: 0 px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.wrapper {
+    display: grid;
+    height: 100%;
+    background-color: #191919;
+    border: 1px solid #297596;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 40px 305px 125px 125px 305px;
+    grid-template-areas: 
+    "navbar navbar navbar navbar navbar navbar"
+    "map map indicators indicators crossfilter1 crossfilter1"
+    "map map indicators indicators crossfilter2 crossfilter3"
+    "tbd tbd dimred dimred crossfilter2 crossfilter3"
+    "tbd tbd dimred dimred crossfilter4 crossfilter4";
+}
+
+.navbar { 
+    grid-area: navbar;
+    background-color: #191919;
+    border: 1px solid #297596;
+
+}
+.map { grid-area: map; background-color: #191919; border: 1px solid #297596;}
+.tbd { grid-area: tbd; background-color: #191919; border: 1px solid #297596;}
+.indicators { grid-area: indicators; background-color: #191919; border: 1px solid #297596;}
+.dimred { grid-area: dimred; background-color: #191919; border: 1px solid #297596;}
+
+.summaries-filters {
+    display: grid;
+    height: 94.3%;
+    background-color: #191919;
+    border: 1px solid #297596;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 150px 252px;
+    grid-template-areas: 
+    "summaries summaries summaries"
+    "filter1 filter2 filter3";
+}
+
+.summaries {
+    grid-area: summaries;
+    background-color: #191919;
+    border: 1px solid #297596;
+}
+
+.filter1 {
+    grid-area: filter1;
+    background-color: #191919;
+    border: 1px solid #297596;
+}
+
+.filter2 {
+    grid-area: filter2;
+    background-color: #191919;
+    border: 1px solid #297596;
+}
+
+.filter3 {
+    grid-area: filter3;
+    background-color: #191919;
+    border: 1px solid #297596;
+}
+
+
+.crossfilter1 { 
+    grid-area: crossfilter1;
+    background-color: #191919;
+    border: 1px solid #297596;
+}
+.crossfilter2 {
+    grid-area: crossfilter2;
+    background-color: #191919;
+    border: 1px solid #297596;
+}
+
+.crossfilter3 {
+    grid-area: crossfilter3;
+    background-color: #191919;
+    border: 1px solid #297596;
+}
+
+.crossfilter4 {
+    grid-area: crossfilter4;
+    background-color: #191919;
+    border: 1px solid #297596;
+}
+
+.axis line{
+    stroke: white;
+  }
+  
+.axis path{
+    stroke: white;
+  }
+  
+.axis text{
+    fill: white;
+    stroke: none
+  }
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+.zoom {
+cursor: move;
+fill: none;
+pointer-events: all;
+}
+
+text {
+    fill: white;
+    stroke: none;
+}
+
+rect.bar:hover {
+    fill: #4CC4C5;
+}
+
+.borough:hover {
+    stroke-width: 3px !important;
+}
+
+.hour.bordered {
+    stroke: #cfcfcf;
+}
+
+.hour.bordered:hover {
+    stroke: #444444;
+    stroke-width: 2;
+}
+
+.tooltip {
+    stroke:#191919;
+    position: absolute;
+    text-align: center;											
+    padding: 2px;				
+    font: 12px sans-serif;		
+    background: rgb(137, 164, 199);	
+    border: 1px solid white;	
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.linetooltip {
+    position: absolute;
+}
+
+button {
+    float: right;
+}
+
+.filter3 button {
+    float: left;
+}
+
+#apply-filters {
+    margin-left: 50px;
+}
+
+#reset-all {
+    float: right;
+    height: 35px;
+}
+
+.plotmenu {
+    border: 1px solid #297596;
+    height: 25px;
+}
+
+.space-before {
+    height: 12px;
+}
+
+.plotmenu > span {
+    line-height: 25px;
+    vertical-align: middle;
+    font-family: Helvetica;
+    font-size: 13px;
+    color: #297596;
+    margin-left: 10px;
+}
+
+.navmenu > span {
+    line-height: 35px;
+    vertical-align: middle;
+    font-family: Helvetica;
+    font-size: 20px;
+    color: #297596;
+    margin-left: 10px;
+}
+
+.navmenu > input {
+    vertical-align: middle;
+    margin-left: 100px;
+}
+
+.navmenu > label {
+    line-height: 35px;
+    vertical-align: middle;
+    font-family: Helvetica;
+    font-size: 15px;
+    color: #297596;
+}
+
+
+.counter-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+
+}
+
+.counter-text {
+    font-size: 20px;
+    color: #ffffff;
+    margin-left: 15px;
+}
+
+#counter-value {
+    font-size: 20px;
+    color: #ffffff;
+    margin-right: 15px;
+  }
+
+#counter-value2 {
+    font-size: 20px;
+    color: #ffffff;
+    margin-right: 15px;
+  }
+
+#counter-value3 {
+    font-size: 20px;
+    color: #ffffff;
+    margin-right: 15px;
+  }
+
+.avg-line {
+    stroke:rgb(84, 69, 216);
+    stroke-dasharray: 5;
+}
+
+.sdup, .sddown {
+    stroke:#d86f45;
+    stroke-dasharray: 5;
+}
+
+.filter1 > span {
+    line-height: 10px;
+    vertical-align: middle;
+    font-family: Helvetica;
+    font-size: 15px;
+    color: #297596;
+    margin-left: 35px;
+}
+
+.filter2 > span {
+    line-height: 10px;
+    vertical-align: middle;
+    font-family: Helvetica;
+    font-size: 15px;
+    color: #297596;
+    margin-left: 35px;
+}
+
+.filter3 > span {
+    line-height: 10px;
+    vertical-align: middle;
+    font-family: Helvetica;
+    font-size: 15px;
+    color: #297596;
+    margin-left: 45px;
+}
+
+.filter1 > input {
+    vertical-align: middle;
+    margin-left: 70px;
+}
+
+.filter1 > label {
+    line-height: 23px;
+    vertical-align: middle;
+    font-family: Helvetica;
+    font-size: 15px;
+    color: white;
+    margin-left: 15px;
+}
+
+.filter2 > input {
+    vertical-align: middle;
+    margin-left: 15px;
+
+}
+
+.filter2 > label {
+    line-height: 23px;
+    vertical-align: middle;
+    font-family: Helvetica;
+    font-size: 15px;
+    color: white;
+}
+
+.filter3 > input {
+    vertical-align: middle;
+    margin-left: 15px;
+
+}
+
+.filter3 > label {
+    line-height: 23px;
+    vertical-align: middle;
+    font-family: Helvetica;
+    font-size: 15px;
+    color: white;
+}
+
+.pca-axis1 path {
+    stroke: white
+}
+
+.pca-axis2 path {
+    stroke: white
+}
+
+.pca-axis1 line {
+    stroke: white
+}
+
+.pca-axis2 line {
+    stroke: white
+}
+
+.addMore{
+    margin-right: 420px;
+}
+
+.dimred-info{
+    margin-right: 380px;
+}
+
+.apply-dim-button{
+    margin-right: 275px;
+}

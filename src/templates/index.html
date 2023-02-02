@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> UK Accidents </title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.23.1/babel.min.js'></script> 
+    <script type="text/javascript" src="{{ url_for('static', filename='js/d3-legend.min.js')}}"></script>   
+    <script type="module" src="{{ url_for('static', filename='js/main.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css')}}">
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="navbar">
+      <div class="navmenu">
+        <span><strong>London Accidents Dashboard</strong></span>
+        <input type="checkbox" class="fatal-only" id="fatal-only" name="fatal-only">
+            <label for="fatal-only">Fatal crashes only</label>
+        <button type="button" id="reset-all">Reset All</button>
+      </div>
+  </div>
+    <div class="map">
+    <div class="plotmenu">
+      <span><strong>ACCIDENTS COUNT BY BOROUGH</strong></span>
+      <button type="button" id="map-reset">Reset</button>
+      <button type="button" id="map-selectall">Select All</button>
+      <button type="button" id="map-unselectall">Unselect All</button>
+    </div>
+  </div>
+  <div class="tbd">
+    <div class="plotmenu">
+      <span><strong>ACCIDENTS COUNT BY MONTH-YEAR</strong></span>
+      </div>
+  </div>
+  <div class="indicators">
+    <div class="plotmenu">
+      <span><strong>SUMMARIES & FILTERS</strong></span>
+      <button class="addMore" title="Average severity: 1 = slight accident, 2 = serious accident, 3 = fatal accident">i</button>
+      </div>
+      <div class="summaries-filters">
+        <div class="summaries">
+          <div class="space-before"></div>
+          <div class="counter-container">
+            <div class="counter-text">Accident Count:</div>
+            <div id=counter-value></div>
+          </div>
+          <div class="counter-container">
+            <div class="counter-text">Fatalities per 1.000 Crashes:</div>
+            <div id=counter-value2></div>
+          </div>
+          <div class="counter-container">
+            <div class="counter-text">Average Severity:</div>
+            <div id=counter-value3></div>
+          </div>
+        </div>
+        <div class="filter1">
+          <span>Speed Limit (mph)</span>
+          <br>
+          <br>
+          <input type="checkbox" class="speedlimit" id="speed1" name="speed1" value="10" checked>
+          <label for="speed1">10</label>
+          <br>
+          <input type="checkbox" class="speedlimit" id="speed2" name="speed2" value="15" checked>
+          <label for="speed2">15</label>
+          <br>
+          <input type="checkbox" class="speedlimit" id="speed3" name="speed3" value="20" checked>
+          <label for="speed3">20</label>
+          <br>
+          <input type="checkbox" class="speedlimit" id="speed4" name="speed4" value="30" checked>
+          <label for="speed4">30</label>
+          <br>
+          <input type="checkbox" class="speedlimit" id="speed5" name="speed5" value="40" checked>
+          <label for="speed5">40</label>
+          <br>
+          <input type="checkbox" class="speedlimit" id="speed6" name="speed6" value="50" checked>
+          <label for="speed6">50</label>
+          <br>
+          <input type="checkbox" class="speedlimit" id="speed7" name="speed7" value="60" checked>
+          <label for="speed7">60</label>
+          <br>
+          <input type="checkbox" class="speedlimit" id="speed8" name="speed8" value="70" checked>
+          <label for="speed8">70</label>
+
+
+        </div>
+        <div class="filter2">
+          <span>Weather Conditions</span>
+            <br>
+            <br>
+            <input type="checkbox" class="weather" id="weather1" name="weather1" value="1" checked>
+            <label for="weather1">Fine no high winds</label>
+            <br>
+            <input type="checkbox" class="weather" id="weather2" name="weather2" value="2" checked>
+            <label for="weather2">Raining no high winds</label>
+            <br>
+            <input type="checkbox" class="weather" id="weather3" name="weather3" value="3" checked>
+            <label for="weather3">Snowing no high winds</label>
+            <br>
+            <input type="checkbox" class="weather" id="weather4" name="weather4" value="4" checked>
+            <label for="weather4">Fine & high winds</label>
+            <br>
+            <input type="checkbox" class="weather" id="weather5" name="weather5" value="5" checked>
+            <label for="weather5">Raining & high winds</label>
+            <br>
+            <input type="checkbox" class="weather" id="weather6" name="weather6" value="6" checked>
+            <label for="weather6">Snowing + high winds</label>
+            <br>
+            <input type="checkbox" class="weather" id="weather7" name="weather7" value="7" checked>
+            <label for="weather7">Fog or mist</label>
+            <br>
+            <input type="checkbox" class="weather" id="weather8" name="weather8" value="8" checked>
+            <label for="weather8">Other</label>
+            <br>
+            <input type="checkbox" class="weather" id="weather9" name="weather9" value="9" checked>
+            <label for="weather9">Unknown</label>
+        </div>
+        <div class="filter3">
+          <span>Light Conditions</span>
+          <br>
+          <br>
+          <input type="checkbox" class="light-cond" id="light1" name="light1" value="1" checked>
+          <label for="light1">Daylight</label>
+          <br>
+          <input type="checkbox" class="light-cond" id="light2" name="light2" value="4" checked>
+          <label for="light2">Darkness - lights lit</label>
+          <br>
+          <input type="checkbox" class="light-cond" id="light3" name="light3" value="5" checked>
+          <label for="light3">Darkness - lights unlit</label>
+          <br>
+          <input type="checkbox" class="light-cond" id="light4" name="light4" value="6" checked>
+          <label for="light4">Darkness - no lighting</label>
+          <br>
+          <input type="checkbox" class="light-cond" id="light5" name="light5" value="7" checked>
+          <label for="light5">Darkness - lighting unk</label>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <button type="button" id="apply-filters">Apply Filters</button>
+        </div>
+      </div>
+  </div> 
+  <div class="dimred">
+    <div class="plotmenu">
+      <span><strong>DIMENSIONALITY REDUCTION</strong></span>
+      <button class="dimred-info" title="Original dimensions (per borough): Accidents count, average severity, borough size">i</button>
+    </div>
+    <button class="apply-dim-button" type="button" id="apply-dimred">Apply PCA</button>
+  </div>
+  <div class="crossfilter1">
+    <div class="plotmenu">
+      <span><strong>ACCIDENTS COUNT BY HOUR</strong></span>
+      <button type="button" id="hourbar-reset">Reset</button>
+      <button type="button" id="hourbar-selectall">Select All</button>
+      <button type="button" id="hourbar-unselectall">Unselect All</button>
+    </div>
+  </div>
+  <div class="crossfilter2">
+    <div class="plotmenu">
+      <span><strong>WEEKDAY</strong></span>
+      <button type="button" id="weekdaybar-reset">Reset</button>
+      <button type="button" id="weekdaybar-selectall">Select All</button>
+      <button type="button" id="weekdaybar-unselectall">Unselect All</button>
+    </div>
+  </div>
+  <div class="crossfilter3">
+    <div class="plotmenu">
+      <span><strong>MONTH</strong></span>
+      <button type="button" id="monthbar-reset">Reset</button>
+      <button type="button" id="monthbar-selectall">Select All</button>
+      <button type="button" id="monthbar-unselectall">Unselect All</button>
+    </div>
+  </div>
+  <div class="crossfilter4">
+    <div class="plotmenu">
+      <span><strong>ACCIDENTS COUNT HEATMAP BY WEEKDAY & MONTH</strong></span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
