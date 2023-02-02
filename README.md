@@ -11,9 +11,9 @@ This dashboard provides visual insights into the car accidents in London from 20
 
 * PCA scatterplot: This plot uses the borough size, average accident severity, and accident count as the principal components.
 
-* Barcharts: This visualization displays the number of car accidents for each year, giving users a sense of the change of the number of car accident over time.
+* Barcharts: These visualizations display the number of car accidents aggregated by hours, week days, and months, allowing users to analyze the temporal shift in the number of car accidents in those time ranges.
 
-* Linechart: This chart displays the time series of the number of car accidents aggregated by month and year, helping to understand the trend of the number of car accidents over time and if there is any seasonality in the data or changes over the years.
+* Linechart: This chart displays the time series of the number of car accidents aggregated by month and year, helping to understand the trend of the number of car accidents over time.
 
 **How to Use the Dashboard**
 
