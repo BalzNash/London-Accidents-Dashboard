@@ -16,7 +16,9 @@ This dashboard provides visual insights into the car accidents in London from 20
 * Linechart: This chart displays the time series of the number of car accidents aggregated by month and year, helping to understand the trend of the number of car accidents over time and if there is any seasonality in the data or changes over the years.
 
 **How to Use the Dashboard**
+
 The dashboard is hosted on GitHub and can be accessed by cloning the repository. Once cloned, run the app.py file.
 
 **Conclusion**
+
 The Car Accidents Visual Analytics Dashboard provides a comprehensive and interactive way to explore the data and understand the trends and patterns in car accidents in London from 2005 to 2015. This dashboard can be used by policy makers, local authorities, and anyone interested in understanding the impact of car accidents on different areas of London.
